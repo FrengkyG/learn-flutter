@@ -8,7 +8,7 @@ class SecondScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          child: Text('Back'),
+          child: const Text('Back'),
           onPressed: () {
             Navigator.pop(context);
           },

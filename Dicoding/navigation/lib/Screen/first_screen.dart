@@ -20,15 +20,25 @@ class FirstScreen extends StatelessWidget {
               child: const Text('Go To Second Screen'),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, 'secondScreenWithData',
+                    arguments: 'Hello from First Screen');
+              },
               child: const Text('Navigation with Data'),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final result =
+                    await Navigator.pushNamed(context, '/returnDataScreen');
+                SnackBar snackBar = SnackBar(content: Text('$result'));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
               child: const Text('Return Data from Another Screen'),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/replacementScreen');
+              },
               child: const Text('Replace Screen'),
             ),
           ],
