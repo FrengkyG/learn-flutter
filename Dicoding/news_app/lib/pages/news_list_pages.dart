@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/models/article.dart';
+import 'package:news_app/pages/detail_pages.dart';
 
 class NewsListPage extends StatelessWidget {
   const NewsListPage({Key? key}) : super(key: key);
@@ -30,12 +31,15 @@ class NewsListPage extends StatelessWidget {
 
 Widget _buildArticleItem(BuildContext context, Article article) {
   return ListTile(
-    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-    leading: Image.network(
-      article.urlToImage,
-      width: 100,
-    ),
-    title: Text(article.title),
-    subtitle: Text(article.author),
-  );
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      leading: Image.network(
+        article.urlToImage,
+        width: 100,
+      ),
+      title: Text(article.title),
+      subtitle: Text(article.author),
+      onTap: () {
+        Navigator.pushNamed(context, DetailPage.routeName, arguments: article);
+      });
 }
