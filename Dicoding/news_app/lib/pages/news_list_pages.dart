@@ -9,24 +9,26 @@ class NewsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('News App'),
-      ),
-      body: FutureBuilder<String>(
-        future:
-            DefaultAssetBundle.of(context).loadString('assets/articles.json'),
-        builder: (context, snapshot) {
-          final List<Article> articles = parseArticles(snapshot.data);
-          return ListView.builder(
-            itemCount: articles.length,
-            itemBuilder: (context, index) {
-              return _buildArticleItem(context, articles[index]);
-            },
-          );
-        },
-      ),
-    );
+        appBar: AppBar(
+          title: Text('News App'),
+        ),
+        body: _buildList(context));
   }
+}
+
+Widget _buildList(BuildContext context) {
+  return FutureBuilder<String>(
+    future: DefaultAssetBundle.of(context).loadString('assets/articles.json'),
+    builder: (context, snapshot) {
+      final List<Article> articles = parseArticles(snapshot.data);
+      return ListView.builder(
+        itemCount: articles.length,
+        itemBuilder: (context, index) {
+          return _buildArticleItem(context, articles[index]);
+        },
+      );
+    },
+  );
 }
 
 Widget _buildArticleItem(BuildContext context, Article article) {
