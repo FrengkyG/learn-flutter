@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:setstate_state_management/pages/done_module_list_page.dart';
+import 'package:setstate_state_management/provider/done_module_provider.dart';
 
 class ModulePage extends StatefulWidget {
   const ModulePage({Key? key}) : super(key: key);
@@ -22,9 +24,7 @@ class _ModulePageState extends State<ModulePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DoneModuleList(
-                    doneModuleList: doneModuleList,
-                  ),
+                  builder: (context) => DoneModuleList(),
                 ),
               );
             },
@@ -64,15 +64,16 @@ class _ModuleListState extends State<ModuleList> {
     return ListView.builder(
         itemCount: moduleList.length,
         itemBuilder: (context, index) {
-          return ModuleTile(
-            moduleName: moduleList[index],
-            isDone: widget.doneModuleList.contains(moduleList[index]),
-            onClick: () {
-              setState(() {
-                widget.doneModuleList.add(moduleList[index]);
-              });
-            },
-          );
+          return Consumer<DoneModuleProvider>(
+              builder: (context, DoneModuleProvider data, widget) {
+            return ModuleTile(
+              moduleName: moduleList[index],
+              isDone: data.doneModuleList.contains(moduleList[index]),
+              onClick: () {
+                data.complete(moduleList[index]);
+              },
+            );
+          });
         });
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:setstate_state_management/provider/done_module_provider.dart';
 
 class DoneModuleList extends StatelessWidget {
-  final List<String> doneModuleList;
-  DoneModuleList({Key? key, required this.doneModuleList}) : super(key: key);
+  DoneModuleList({Key? key}) : super(key: key);
 
   final List<String> moduleList = [
     'Modul 1 - Pengenalan Dart',
@@ -19,6 +20,8 @@ class DoneModuleList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final doneModuleList =
+        Provider.of<DoneModuleProvider>(context, listen: false).doneModuleList;
     return Scaffold(
       appBar: AppBar(
         title: Text('Done Module List'),
