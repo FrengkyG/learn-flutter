@@ -1,3 +1,4 @@
+import 'package:dicoding_subscriptions/common.dart';
 import 'package:flutter/material.dart';
 
 class OrWidget extends StatelessWidget {
@@ -9,7 +10,7 @@ class OrWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       alignment: Alignment.center,
       child: Text(
-        "atau",
+        AppLocalizations.of(context)!.orText,
         textAlign: TextAlign.center,
       ),
     );

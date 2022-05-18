@@ -13,6 +13,11 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  app_settings: ^4.1.6
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+  
 
 dev_dependencies:
   flutter_test:
@@ -21,6 +26,7 @@ dev_dependencies:
   flutter_lints: ^1.0.0
 
 flutter:
+  generate: true
   uses-material-design: true
   assets:
     - assets/dicoding-academy.png
