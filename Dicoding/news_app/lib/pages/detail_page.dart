@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/models/article.dart';
+import 'package:news_app/data/models/article.dart';
 import 'package:news_app/pages/article_webview_page.dart';
 
 class DetailPage extends StatelessWidget {
@@ -17,15 +17,15 @@ class DetailPage extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: article.urlToImage,
-              child: Image.network(article.urlToImage),
+              tag: article.urlToImage!,
+              child: Image.network(article.urlToImage!),
             ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(article.description),
+                  Text(article.description ?? "-"),
                   const Divider(color: Colors.grey),
                   Text(
                     article.title,
@@ -40,7 +40,7 @@ class DetailPage extends StatelessWidget {
                   Text('Author: ${article.author}'),
                   const Divider(color: Colors.grey),
                   Text(
-                    article.content,
+                    article.content ?? "-",
                     style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 10),
