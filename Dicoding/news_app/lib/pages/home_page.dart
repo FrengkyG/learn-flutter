@@ -4,8 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/data/api/api_service.dart';
 import 'package:news_app/pages/article_list_page.dart';
+import 'package:news_app/pages/detail_page.dart';
 import 'package:news_app/pages/settings_page.dart';
 import 'package:news_app/provider/news_provider.dart';
+import 'package:news_app/provider/scheduling_provider.dart';
+import 'package:news_app/utils/notification_helper.dart';
 import 'package:news_app/widgets/platform_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +21,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final NotificationHelper _notificationHelper = NotificationHelper();
+
   int _bottomNavIndex = 0;
 
   final List<Widget> _listWidget = [
@@ -25,7 +30,10 @@ class _HomePageState extends State<HomePage> {
       create: (_) => NewsProvider(apiService: ApiService()),
       child: ArticleListPage(),
     ),
-    const SettingsPage(),
+    ChangeNotifierProvider<SchedulingProvider>(
+      create: (_) => SchedulingProvider(),
+      child: SettingsPage(),
+    ),
   ];
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = [
@@ -38,6 +46,19 @@ class _HomePageState extends State<HomePage> {
       label: 'Settings',
     ),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _notificationHelper
+        .configureSelectNotificationSubject(DetailPage.routeName);
+  }
+
+  @override
+  void dispose() {
+    selectNotificationSubject.close();
+    super.dispose();
+  }
 
   void _onBottomNavTapped(int index) {
     setState(() {
