@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
         ),
         onTap: () {
           Navigator.pushNamed(context, DetailPage.routeName,
-              arguments: restaurant);
+              arguments: restaurant.id);
         },
       ),
     );
