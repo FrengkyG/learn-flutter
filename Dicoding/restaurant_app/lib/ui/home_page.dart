@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant_list.dart';
 import 'package:restaurant_app/ui/detail_page.dart';
+import 'package:restaurant_app/ui/search_result_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -13,8 +15,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController _searchController = TextEditingController();
   late Future<RestaurantList> _restaurantList;
   String smallImageUrl = ApiService.smallImageUrl;
+  Icon customIcon = const Icon(Icons.search);
+  Widget customSearchBar = Text('Restaurant', style: myTextTheme.headline4);
 
   @override
   void initState() {
@@ -114,13 +119,61 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        titleSpacing: 8,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: customSearchBar,
+        actions: [
+          IconButton(
+            icon: customIcon,
+            onPressed: () {
+              setState(() {
+                if (customIcon.icon == Icons.search) {
+                  customIcon = const Icon(Icons.cancel);
+                  customSearchBar = Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _searchController,
+                          decoration: const InputDecoration(
+                            hintText: 'input restaurant name',
+                            hintStyle: TextStyle(
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.search,
+                          size: 28,
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, SearchResultPage.routeName,
+                              arguments: _searchController.text);
+                        },
+                      ),
+                    ],
+                  );
+                } else {
+                  customIcon = const Icon(Icons.search);
+                  customSearchBar =
+                      Text('Restaurant', style: myTextTheme.headline4);
+                  _searchController.clear();
+                }
+              });
+            },
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Restaurant', style: Theme.of(context).textTheme.headline4),
               Text('Recommendation restaurant for you!',
                   style: Theme.of(context).textTheme.headline6),
               const SizedBox(height: 16.0),
