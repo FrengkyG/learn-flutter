@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 Color primaryColor = const Color(0xFFE1F6FF);
 Color secondaryColor = const Color(0xFFFFECB4);
+Color whiteColor = const Color(0xFFFFFFFF);
 
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.poppins(
@@ -18,7 +19,8 @@ final TextTheme myTextTheme = TextTheme(
   subtitle1: GoogleFonts.poppins(
       fontSize: 15, fontWeight: FontWeight.w400, letterSpacing: 0.15),
   subtitle2: GoogleFonts.poppins(
-      fontSize: 13, fontWeight: FontWeight.w500, letterSpacing: 0.1),
+          fontSize: 13, fontWeight: FontWeight.w500, letterSpacing: 0.1)
+      .copyWith(overflow: TextOverflow.ellipsis),
   bodyText1: GoogleFonts.inter(
       fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.5),
   bodyText2: GoogleFonts.inter(
