@@ -6,6 +6,9 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   static const String _baseUrl = 'https://restaurant-api.dicoding.dev/';
+  static const String smallImageUrl = _baseUrl + 'images/small/';
+  static const String mediumImageUrl = _baseUrl + 'images/medium/';
+  static const String largeImageUrl = _baseUrl + 'images/large/';
 
   Future<RestaurantList> list() async {
     final response = await http.get(Uri.parse(_baseUrl + "list"));
