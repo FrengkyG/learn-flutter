@@ -72,6 +72,22 @@ class _DetailPageState extends State<DetailPage> {
                 const SizedBox(
                   height: 8,
                 ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      color: Colors.black54,
+                      size: 13,
+                    ),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    Text(restaurant.rating.toString()),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
                 Text(restaurant.description),
                 const SizedBox(
                   height: 16,
