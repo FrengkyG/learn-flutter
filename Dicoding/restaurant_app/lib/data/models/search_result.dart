@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 SearchResult searchResultFromJson(String str) =>
@@ -15,13 +14,13 @@ class SearchResult {
 
   bool error;
   int founded;
-  List<Restaurant> restaurants;
+  List<RestaurantSearch> restaurants;
 
   factory SearchResult.fromJson(Map<String, dynamic> json) => SearchResult(
         error: json["error"],
         founded: json["founded"],
-        restaurants: List<Restaurant>.from(
-            json["restaurants"].map((x) => Restaurant.fromJson(x))),
+        restaurants: List<RestaurantSearch>.from(
+            json["restaurants"].map((x) => RestaurantSearch.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,8 +30,8 @@ class SearchResult {
       };
 }
 
-class Restaurant {
-  Restaurant({
+class RestaurantSearch {
+  RestaurantSearch({
     required this.id,
     required this.name,
     required this.description,
@@ -48,7 +47,8 @@ class Restaurant {
   String city;
   double rating;
 
-  factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
+  factory RestaurantSearch.fromJson(Map<String, dynamic> json) =>
+      RestaurantSearch(
         id: json["id"],
         name: json["name"],
         description: json["description"],
