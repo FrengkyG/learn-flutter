@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant_list.dart';
+import 'package:restaurant_app/provider/restaurant_list_provider.dart';
 import 'package:restaurant_app/ui/detail_page.dart';
 import 'package:restaurant_app/ui/search_result_page.dart';
 
@@ -16,41 +18,36 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
-  late Future<RestaurantList> _restaurantList;
   String smallImageUrl = ApiService.smallImageUrl;
   Icon customIcon = const Icon(Icons.search);
   Widget customSearchBar = Text('Restaurant', style: myTextTheme.headline4);
 
-  @override
-  void initState() {
-    super.initState();
-    _restaurantList = ApiService().list();
-  }
-
   Widget _buildList(BuildContext context) {
-    return FutureBuilder(
-        future: _restaurantList,
-        builder: (context, AsyncSnapshot<RestaurantList> snapshot) {
-          var state = snapshot.connectionState;
-          if (state != ConnectionState.done) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: snapshot.data?.restaurants.length,
-                  itemBuilder: (context, index) {
-                    var restaurant = snapshot.data?.restaurants[index];
-                    return _buildRestaurantItem(context, restaurant!);
-                  });
-            } else if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
-            } else {
-              return const Text('');
-            }
-          }
-        });
+    return Consumer<RestaurantListProvider>(builder: (context, state, _) {
+      if (state.state == ResultState.Loading) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      } else if (state.state == ResultState.HasData) {
+        return ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: state.result.restaurants.length,
+            itemBuilder: (context, index) {
+              var restaurant = state.result.restaurants[index];
+              return _buildRestaurantItem(context, restaurant);
+            });
+      } else if (state.state == ResultState.NoData) {
+        return Center(child: Text(state.message));
+      } else if (state.state == ResultState.Error) {
+        return const Center(
+            child: Text("Oops. Terjadi Kesalahan. Mohon coba kembali"));
+      } else {
+        return const Center(
+          child: Text(''),
+        );
+      }
+    });
   }
 
   Widget _buildRestaurantItem(BuildContext context, Restaurant restaurant) {
@@ -177,7 +174,11 @@ class _HomePageState extends State<HomePage> {
               Text('Recommendation restaurant for you!',
                   style: Theme.of(context).textTheme.headline6),
               const SizedBox(height: 16.0),
-              Expanded(child: _buildList(context)),
+              Expanded(
+                  child: ChangeNotifierProvider<RestaurantListProvider>(
+                      create: (_) =>
+                          RestaurantListProvider(apiService: ApiService()),
+                      child: _buildList(context))),
             ],
           ),
         ),
