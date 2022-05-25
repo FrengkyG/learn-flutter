@@ -16,7 +16,7 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   String largeImageUrl = ApiService.largeImageUrl;
 
-  Widget _buildDetail(BuildContext context, var id) {
+  Widget _buildDetail(BuildContext context) {
     return Consumer<RestaurantDetailProvider>(builder: (context, state, _) {
       if (state.state == ResultState.Loading) {
         return const Center(child: CircularProgressIndicator());
@@ -52,7 +52,7 @@ class _DetailPageState extends State<DetailPage> {
         child: ChangeNotifierProvider<RestaurantDetailProvider>(
             create: (_) =>
                 RestaurantDetailProvider(apiService: ApiService(), id: id),
-            child: _buildDetail(context, id)),
+            child: _buildDetail(context)),
       ),
     );
   }
