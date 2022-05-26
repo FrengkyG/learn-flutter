@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/data/api/api_service.dart';
 import 'package:news_app/pages/article_list_page.dart';
+import 'package:news_app/pages/bookmarks_page.dart';
 import 'package:news_app/pages/detail_page.dart';
 import 'package:news_app/pages/settings_page.dart';
 import 'package:news_app/provider/news_provider.dart';
@@ -26,20 +27,21 @@ class _HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
 
   final List<Widget> _listWidget = [
-    ChangeNotifierProvider<NewsProvider>(
-      create: (_) => NewsProvider(apiService: ApiService()),
-      child: ArticleListPage(),
-    ),
-    ChangeNotifierProvider<SchedulingProvider>(
-      create: (_) => SchedulingProvider(),
-      child: SettingsPage(),
-    ),
+    ArticleListPage(),
+    BookmarksPage(),
+    SettingsPage(),
   ];
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = [
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.news : Icons.public),
       label: 'Headline',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Platform.isIOS
+          ? CupertinoIcons.bookmark
+          : Icons.collections_bookmark),
+      label: BookmarksPage.bookmarksTitle,
     ),
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),

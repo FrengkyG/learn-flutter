@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 Color primaryColor = const Color(0xffFFFFFF);
 Color secondaryColor = const Color(0xFF6B38FB);
+Color darkPrimaryColor = const Color(0xFF000000);
+Color darkSecondaryColor = const Color(0xff64ffda);
 
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.merriweather(
@@ -31,4 +33,59 @@ final TextTheme myTextTheme = TextTheme(
       fontSize: 12, fontWeight: FontWeight.w400, letterSpacing: 0.4),
   overline: GoogleFonts.libreFranklin(
       fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 1.5),
+);
+
+ThemeData lightTheme = ThemeData(
+  colorScheme: ThemeData.light().colorScheme.copyWith(
+        primary: primaryColor,
+        onPrimary: Colors.black,
+        secondary: secondaryColor,
+      ),
+  scaffoldBackgroundColor: Colors.white,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: myTextTheme,
+  appBarTheme: const AppBarTheme(elevation: 0),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: secondaryColor,
+      onPrimary: Colors.white,
+      textStyle: const TextStyle(),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(0),
+        ),
+      ),
+    ),
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    selectedItemColor: secondaryColor,
+    unselectedItemColor: Colors.grey,
+  ),
+);
+
+ThemeData darkTheme = ThemeData.dark().copyWith(
+  colorScheme: ThemeData.dark().colorScheme.copyWith(
+        primary: darkPrimaryColor,
+        onPrimary: Colors.black,
+        secondary: darkSecondaryColor,
+      ),
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: myTextTheme,
+  appBarTheme: const AppBarTheme(elevation: 0),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    selectedItemColor: darkSecondaryColor,
+    unselectedItemColor: Colors.grey,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: secondaryColor,
+      onPrimary: Colors.white,
+      textStyle: const TextStyle(),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(0),
+        ),
+      ),
+    ),
+  ),
 );
