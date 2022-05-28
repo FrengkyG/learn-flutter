@@ -13,6 +13,12 @@ dependencies:
   google_fonts: ^2.3.2
   http: ^0.13.4
   provider: ^6.0.3
+  intl: ^0.17.0
+  android_alarm_manager_plus: ^2.0.3
+  flutter_local_notifications: ^5.0.0
+  rxdart: ^0.26.0
+  shared_preferences: ^2.0.15
+  sqflite: ^2.0.2+1
 
 dev_dependencies:
   flutter_test:

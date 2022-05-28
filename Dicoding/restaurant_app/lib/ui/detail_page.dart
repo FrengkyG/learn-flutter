@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/provider/restaurant_detail_provider.dart';
 import 'package:restaurant_app/ui/detail_content_page.dart';
+import 'package:restaurant_app/utils/result_state.dart';
 
 class DetailPage extends StatefulWidget {
   static const routeName = '/detail_page';
@@ -18,9 +19,9 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget _buildDetail(BuildContext context) {
     return Consumer<RestaurantDetailProvider>(builder: (context, state, _) {
-      if (state.state == ResultState.Loading) {
+      if (state.state == ResultState.loading) {
         return const Center(child: CircularProgressIndicator());
-      } else if (state.state == ResultState.HasData) {
+      } else if (state.state == ResultState.hasData) {
         var restaurant = state.result.restaurant;
         var foods = restaurant.menus.foods;
         var drinks = restaurant.menus.drinks;
@@ -31,9 +32,9 @@ class _DetailPageState extends State<DetailPage> {
             foods: foods,
             drinks: drinks,
             review: review);
-      } else if (state.state == ResultState.NoData) {
+      } else if (state.state == ResultState.noData) {
         return Center(child: Text(state.message));
-      } else if (state.state == ResultState.Error) {
+      } else if (state.state == ResultState.error) {
         return const Center(
             child: Text("Oops. Terjadi Kesalahan. Mohon coba kembali"));
       } else {

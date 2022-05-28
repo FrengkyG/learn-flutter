@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/models/search_result.dart';
-
-enum ResultState { Loading, NoData, HasData, Error }
+import 'package:restaurant_app/utils/result_state.dart';
 
 class SearchProvider extends ChangeNotifier {
   final ApiService apiService;
@@ -23,21 +22,21 @@ class SearchProvider extends ChangeNotifier {
 
   Future<dynamic> _fetchSearch() async {
     try {
-      _state = ResultState.Loading;
+      _state = ResultState.loading;
       notifyListeners();
       final restaurantSearch = await apiService.search(query);
 
       if (restaurantSearch.restaurants.isEmpty) {
-        _state = ResultState.NoData;
+        _state = ResultState.noData;
         notifyListeners();
         return _message = 'Empty Data';
       } else {
-        _state = ResultState.HasData;
+        _state = ResultState.hasData;
         notifyListeners();
         return _restaurantSearch = restaurantSearch;
       }
     } catch (e) {
-      _state = ResultState.Error;
+      _state = ResultState.error;
       notifyListeners();
       return _message = 'Oops. Terjadi Kesalahan. Mohon coba kembali';
     }

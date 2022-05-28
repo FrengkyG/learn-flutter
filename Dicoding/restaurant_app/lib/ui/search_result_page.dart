@@ -4,6 +4,7 @@ import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/models/search_result.dart';
 import 'package:restaurant_app/provider/search_provider.dart';
 import 'package:restaurant_app/ui/detail_page.dart';
+import 'package:restaurant_app/utils/result_state.dart';
 
 class SearchResultPage extends StatefulWidget {
   static const routeName = '/search_result_page';
@@ -20,9 +21,9 @@ class _SearchResultPageState extends State<SearchResultPage> {
   Widget _buildList(BuildContext context) {
     return Consumer<SearchProvider>(
       builder: (context, state, _) {
-        if (state.state == ResultState.Loading) {
+        if (state.state == ResultState.loading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state.state == ResultState.HasData) {
+        } else if (state.state == ResultState.hasData) {
           return ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
@@ -31,7 +32,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                 var restaurant = state.result.restaurants[index];
                 return _buildRestaurantItem(context, restaurant);
               });
-        } else if (state.state == ResultState.NoData) {
+        } else if (state.state == ResultState.noData) {
           return Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +44,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                   Text('Data tidak ditemukan')
                 ]),
           );
-        } else if (state.state == ResultState.Error) {
+        } else if (state.state == ResultState.error) {
           return const Center(
               child: Text("Oops. Terjadi Kesalahan. Mohon coba kembali"));
         } else {
