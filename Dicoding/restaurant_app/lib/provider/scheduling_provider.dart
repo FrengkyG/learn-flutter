@@ -16,7 +16,7 @@ class SchedulingProvider extends ChangeNotifier {
         Duration(seconds: 5),
         1,
         BackgroundService.callback,
-        startAt: DateTime.now(),
+        startAt: DateTimeHelper.format(),
         exact: true,
         wakeup: true,
       );

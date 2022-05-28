@@ -1,8 +1,6 @@
 import 'dart:isolate';
 
 import 'dart:ui';
-
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/main.dart';
 import 'package:restaurant_app/utils/notification_helper.dart';
