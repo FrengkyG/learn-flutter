@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.favorite),
-      label: 'My Bookmarks',
+      label: 'My Favorite',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.settings),

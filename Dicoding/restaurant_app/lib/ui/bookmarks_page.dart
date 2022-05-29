@@ -16,12 +16,12 @@ class BookmarksPage extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
       child: Padding(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Your Bookmarked Restaurants',
+              'Your Favorite Restaurants',
               style: Theme.of(context).textTheme.headline4,
             ),
             Expanded(
