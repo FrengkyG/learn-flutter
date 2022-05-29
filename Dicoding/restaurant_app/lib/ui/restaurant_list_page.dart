@@ -188,13 +188,13 @@ class _RestaurantListState extends State<RestaurantListPage> {
                   },
                   trailing: isBookmarked
                       ? IconButton(
-                          icon: Icon(Icons.favorite),
+                          icon: const Icon(Icons.favorite),
                           color: Colors.deepOrange,
                           onPressed: () =>
                               provider.removeBookmark(restaurant.id),
                         )
                       : IconButton(
-                          icon: Icon(Icons.favorite_border_outlined),
+                          icon: const Icon(Icons.favorite_border_outlined),
                           color: Colors.deepOrange,
                           onPressed: () => provider.addBookmark(restaurant),
                         ),

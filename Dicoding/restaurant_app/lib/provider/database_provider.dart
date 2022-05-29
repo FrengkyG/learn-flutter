@@ -36,7 +36,6 @@ class DatabaseProvider extends ChangeNotifier {
       await databaseHelper.insertBookmark(restaurant);
       _getBookmarks();
     } catch (e) {
-      print(restaurant);
       _state = ResultState.error;
       _message = 'Gagal menambahkan bookmark';
       notifyListeners();
@@ -53,8 +52,6 @@ class DatabaseProvider extends ChangeNotifier {
       await databaseHelper.removeBookmark(id);
       _getBookmarks();
     } catch (e) {
-      print(id);
-
       _state = ResultState.error;
       _message = 'Gagal menghapus bookmark';
       notifyListeners();
