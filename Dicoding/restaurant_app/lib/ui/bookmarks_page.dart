@@ -24,6 +24,9 @@ class BookmarksPage extends StatelessWidget {
               'Your Favorite Restaurants',
               style: Theme.of(context).textTheme.headline4,
             ),
+            const SizedBox(
+              height: 16,
+            ),
             Expanded(
               child: _buildList(),
             ),
