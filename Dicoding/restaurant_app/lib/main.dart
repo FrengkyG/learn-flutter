@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/preferences/preferences_helper.dart';
+import 'package:restaurant_app/provider/database_provider.dart';
 import 'package:restaurant_app/provider/preferences_provider.dart';
 import 'package:restaurant_app/provider/restaurant_list_provider.dart';
 import 'package:restaurant_app/provider/scheduling_provider.dart';
@@ -18,6 +19,8 @@ import 'package:restaurant_app/utils/background_service.dart';
 
 import 'package:restaurant_app/utils/notification_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'data/db/database_helper.dart';
 
 //untuk memperbaiki image.network error CERTIFICATE_VERIFY_FAILED
 class MyHttpOverrides extends HttpOverrides {
@@ -68,6 +71,11 @@ class MyApp extends StatelessWidget {
               preferencesHelper: PreferencesHelper(
                 sharedPreferences: SharedPreferences.getInstance(),
               ),
+            ),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => DatabaseProvider(
+              databaseHelper: DatabaseHelper(),
             ),
           ),
         ],
