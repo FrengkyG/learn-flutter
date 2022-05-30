@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant_list.dart';
 import 'package:restaurant_app/ui/detail_page.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../provider/database_provider.dart';
 import '../utils/result_state.dart';
@@ -44,7 +45,9 @@ class BookmarksPage extends StatelessWidget {
             itemCount: provider.bookmarks.length,
             itemBuilder: (context, index) {
               var restaurant = provider.bookmarks[index];
-              return _buildRestaurantItem(context, restaurant);
+              var isBookmarked = provider.isBookmarked(restaurant.id);
+              return _buildRestaurantItem(
+                  context, restaurant, isBookmarked, provider);
             },
           );
         } else {
@@ -56,66 +59,83 @@ class BookmarksPage extends StatelessWidget {
     );
   }
 
-  Widget _buildRestaurantItem(BuildContext context, Restaurant restaurant) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12.0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Theme.of(context).colorScheme.primary),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(8.0),
-        leading: Hero(
-          tag: restaurant.pictureId,
-          child: Container(
-            width: 100,
-            height: 150,
+  Widget _buildRestaurantItem(BuildContext context, Restaurant restaurant,
+      isBookmarked, DatabaseProvider provider) {
+    return FutureBuilder<bool>(
+        future: provider.isBookmarked(restaurant.id),
+        builder: (context, snapshot) {
+          var isBookmarked = snapshot.data ?? false;
+          return Container(
+            margin: const EdgeInsets.only(bottom: 12.0),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                  image: NetworkImage(
-                    ApiService.smallImageUrl + restaurant.pictureId,
+                borderRadius: BorderRadius.circular(10.0),
+                color: Theme.of(context).colorScheme.primary),
+            child: ListTile(
+              contentPadding: const EdgeInsets.all(8.0),
+              leading: Hero(
+                tag: restaurant.pictureId,
+                child: Container(
+                  width: 100,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          ApiService.smallImageUrl + restaurant.pictureId,
+                        ),
+                        fit: BoxFit.cover),
                   ),
-                  fit: BoxFit.cover),
+                ),
+              ),
+              title: Text(restaurant.name),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.pin_drop,
+                        color: Colors.black54,
+                        size: 13,
+                      ),
+                      const SizedBox(
+                        width: 2,
+                      ),
+                      Text(restaurant.city),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Colors.black54,
+                        size: 15,
+                      ),
+                      const SizedBox(
+                        width: 2,
+                      ),
+                      Text(restaurant.rating.toString()),
+                    ],
+                  )
+                ],
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, DetailPage.routeName,
+                    arguments: restaurant.id);
+              },
+              trailing: isBookmarked
+                  ? IconButton(
+                      icon: const Icon(Icons.favorite),
+                      color: Colors.deepOrange,
+                      onPressed: () => provider.removeBookmark(restaurant.id),
+                    )
+                  : IconButton(
+                      icon: const Icon(Icons.favorite_border_outlined),
+                      color: Colors.deepOrange,
+                      onPressed: () => provider.addBookmark(restaurant),
+                    ),
             ),
-          ),
-        ),
-        title: Text(restaurant.name),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.pin_drop,
-                  color: Colors.black54,
-                  size: 13,
-                ),
-                const SizedBox(
-                  width: 2,
-                ),
-                Text(restaurant.city),
-              ],
-            ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.star,
-                  color: Colors.black54,
-                  size: 15,
-                ),
-                const SizedBox(
-                  width: 2,
-                ),
-                Text(restaurant.rating.toString()),
-              ],
-            )
-          ],
-        ),
-        onTap: () {
-          Navigator.pushNamed(context, DetailPage.routeName,
-              arguments: restaurant.id);
-        },
-      ),
-    );
+          );
+        });
   }
 }
