@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant_list.dart';
 import 'package:restaurant_app/ui/detail_page.dart';
-import 'package:sqflite/sqflite.dart';
 
 import '../provider/database_provider.dart';
 import '../utils/result_state.dart';
