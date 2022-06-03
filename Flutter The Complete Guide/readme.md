@@ -29,14 +29,6 @@ I thought this course would live up to my expectations. I bought this course to 
 | Total Progress | 4.53% | 
 
 
-# My Flutter Learning Diary
-
-### My Progress 
-![4.53%](https://progress-bar.dev/5) 
-<br/>
-<br/>
-
-
 #### Day 2 - * June 2022*
 #
 
