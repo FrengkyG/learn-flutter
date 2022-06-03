@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_model.dart';
+import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
@@ -18,13 +19,16 @@ void main() {
   late MovieRepositoryImpl repository;
   late MockMovieRemoteDataSource mockRemoteDataSource;
   late MockMovieLocalDataSource mockLocalDataSource;
+  late MockNetworkInfo mockNetworkInfo;
 
   setUp(() {
     mockRemoteDataSource = MockMovieRemoteDataSource();
+    mockNetworkInfo = MockNetworkInfo();
     mockLocalDataSource = MockMovieLocalDataSource();
     repository = MovieRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
       localDataSource: mockLocalDataSource,
+      networkInfo: mockNetworkInfo,
     );
   });
 
@@ -62,10 +66,49 @@ void main() {
     voteCount: 13507,
   );
 
+  final testMovieCache = MovieTable(
+    id: 557,
+    title: 'Spider-Man',
+    posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+    overview:
+        'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+  );
+
   final tMovieModelList = <MovieModel>[tMovieModel];
   final tMovieList = <Movie>[tMovie];
 
   group('Now Playing Movies', () {
+    setUp(() {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+    });
+
+    test('should check if the device is online', () async {
+      //arrange
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(mockRemoteDataSource.getNowPlayingMovies())
+          .thenAnswer((_) async => []);
+      //act
+      await repository.getNowPlayingMovies();
+      //assert
+      verify(mockNetworkInfo.isConnected);
+    });
+
+    setUp(() {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+    });
+
+    test(
+        'should cache data locally when the call to remote data source is successfull',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getNowPlayingMovies())
+          .thenAnswer((_) async => tMovieModelList);
+      // act
+      await repository.getNowPlayingMovies();
+      //assert
+      verify(mockRemoteDataSource.getNowPlayingMovies());
+      verify(mockLocalDataSource.cacheNowPlayingMovies([testMovieCache]));
+    });
     test(
         'should return remote data when the call to remote data source is successful',
         () async {
