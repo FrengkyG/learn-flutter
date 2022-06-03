@@ -1,11 +1,13 @@
 # My Flutter Learning Diary
 
 ### My Progress 
-![0%](https://progress-bar.dev/0)
+![0%](https://progress-bar.dev/0) 
+<br/>
+<br/>
 
-#### Day 1
-*03 June 2022*
----
+
+#### Day 1 - *03 June 2022*
+#
 
 #####  What i learn today :
 
