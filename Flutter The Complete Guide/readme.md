@@ -12,7 +12,7 @@
 #####  What i learn today :
 - Create flutter project using terminal
 - Get package using terminal
-- Basic dart : function, variable, objects, constructor, named constructor
+- Basic dart : function, variable, objects, constructor, named constructor, list
 - How flutter running or built from main.dart
 - Visible and Invisible Widget
 
@@ -25,7 +25,7 @@ I thought this course would live up to my expectations. I bought this course to 
 | Notes | Progress | 
 | ------ | ------   | 
 | Watched Video Duration | 01:49  | 
-| Learning Duration | 1:58 | 
-| Total Progress | 5% | 
+| Learning Duration | 01:58 | 
+| Total Progress | 4.53% | 
 
 
