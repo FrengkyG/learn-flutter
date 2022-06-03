@@ -4,8 +4,8 @@
 ![0%](https://progress-bar.dev/0)
 
 #### Day 1
----
 *03 June 2022*
+---
 
 #####  What i learn today :
 
