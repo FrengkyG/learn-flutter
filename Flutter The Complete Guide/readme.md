@@ -5,7 +5,7 @@
 <br/>
 <br/>
 
-
+---
 #### Day 1 - *03 June 2022*
 #
 
@@ -28,8 +28,9 @@ I thought this course would live up to my expectations. I bought this course to 
 | Learning Duration | 01:58 | 
 | Total Progress | 4.53% | 
 
+---
 
-#### Day 2 - * June 2022*
+#### Day 2 - *June 2022*
 #
 
 #####  What i learn today :
