@@ -44,17 +44,22 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Quizly'),
         ),
-        body: Column(
-          children: [
-            Question(
-                questionText:
-                    questions[_questionIndex]['questionText'].toString()),
-            ...(questions[_questionIndex]['answers'] as List<String>)
-                .map((answer) {
-              return Answer(selectHandler: _answerQuestion, answer: answer);
-            }).toList(),
-          ],
-        ),
+        body: _questionIndex < questions.length
+            ? Column(
+                children: [
+                  Question(
+                      questionText:
+                          questions[_questionIndex]['questionText'].toString()),
+                  ...(questions[_questionIndex]['answers'] as List<String>)
+                      .map((answer) {
+                    return Answer(
+                        selectHandler: _answerQuestion, answer: answer);
+                  }).toList(),
+                ],
+              )
+            : const Center(
+                child: Text('You Did It!'),
+              ),
       ),
     );
   }
