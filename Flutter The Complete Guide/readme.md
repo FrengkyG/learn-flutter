@@ -49,7 +49,7 @@ I thought this course would live up to my expectations. I bought this course to 
 - Debugging using print, debug mode vs code, dart dev tools
 
 ##### My Thoughts :
-I learned a lot about basic widgets and darts. Especially about stateless and stateful widget. I already know state is very important in flutter, so today I am grateful to learn about that. Debugging using vscode is something new for me and i'm happy with this course section because a lot of information I can see using vscode debugging. Lastly, I'm a little bit overwhelmed in dividing the widget into custom widgets and how the data is passed through the constructor. I hope I can understand more in custom widgets
+I learned a lot about basic widgets and dart syntax. Especially about stateless and stateful widget. I already know state is very important in flutter, so today I am grateful to learn about that. Debugging using vscode is something new for me and i'm happy with this course section because a lot of information I can see using vscode debugging. Lastly, I'm a little bit overwhelmed in dividing the widget into custom widgets and how the data is passed through the constructor. I hope I can understand more in custom widgets
 
 
 ###### Last Chapter : #70 
