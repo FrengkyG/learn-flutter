@@ -1,7 +1,7 @@
 # My Flutter Learning Diary
 
 ### My Progress 
-![4.53%](https://progress-bar.dev/5) 
+![13.94%](https://progress-bar.dev/14) 
 <br/>
 <br/>
 
@@ -26,26 +26,39 @@ I thought this course would live up to my expectations. I bought this course to 
 | ------ | ------   | 
 | Watched Video Duration | 01:49  | 
 | Learning Duration | 01:58 | 
-| Total Progress | 4.53% | 
+| Today Progress | 4.53% | 
 
 ---
 
-#### Day 2 - *June 2022*
+#### Day 2 - *04 June 2022*
 #
 
 #####  What i learn today :
-
+- Lists
+- Anonymous Function
+- Stateless & Stateful widget
+- Private properties
+- Custom widget
+- Enums
+- Basic Styling
+- Map
+- final & const
+- if else
+- Big Widget vs Small Widgets
+- Migrating from old button to new button
+- Debugging using print, debug mode vs code, dart dev tools
 
 ##### My Thoughts :
+I learned a lot about basic widgets and darts. Especially about stateless and stateful widget. I already know state is very important in flutter, so today I am grateful to learn about that. Debugging using vscode is something new for me and i'm happy with this course section because a lot of information I can see using vscode debugging. Lastly, I'm a little bit overwhelmed in dividing the widget into custom widgets and how the data is passed through the constructor. I hope I can understand more in custom widgets
 
 
-###### Last Chapter : #31 
+###### Last Chapter : #70 
 
 
 | Notes | Progress | 
 | ------ | ------   | 
-| Watched Video Duration | 01:49  | 
-| Learning Duration | 01:58 | 
-| Total Progress | 4.53% | 
+| Watched Video Duration | 03:47  | 
+| Learning Duration | 05:09 | 
+| Today Progress | 9.41% | 
 
 
