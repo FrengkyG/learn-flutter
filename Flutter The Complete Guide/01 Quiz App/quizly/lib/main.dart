@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizly/answer.dart';
 import 'package:quizly/question.dart';
 
 void main() {
@@ -36,20 +37,9 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             Question(questionText: questions[_questionIndex]),
-            ElevatedButton(
-              onPressed: () {
-                _answerQuestion();
-              },
-              child: const Text('Button1'),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Button2'),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Button3'),
-            ),
+            Answer(selectHandler: _answerQuestion),
+            Answer(selectHandler: _answerQuestion),
+            Answer(selectHandler: _answerQuestion),
           ],
         ),
       ),
