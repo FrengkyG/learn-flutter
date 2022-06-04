@@ -17,8 +17,18 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _questionIndex = 0;
+  int _totalScore = 0;
 
-  _answerQuestion() {
+  _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  _answerQuestion(int score) {
+    _totalScore += score;
+
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
@@ -29,15 +39,30 @@ class _MyAppState extends State<MyApp> {
     const _questions = [
       {
         'questionText': 'What\'s Your Favorite Colour',
-        'answers': ['Black', 'Red', 'Green', 'Blue'],
+        'answers': [
+          {'text': 'Black', 'score': 10},
+          {'text': 'Red', 'score': 8},
+          {'text': 'Green', 'score': 6},
+          {'text': 'Blue', 'score': 4},
+        ],
       },
       {
         'questionText': 'What\'s Your Favorite Animal',
-        'answers': ['Dog', 'Cat', 'Rabbit', 'Hamster'],
+        'answers': [
+          {'text': 'Dog', 'score': 6},
+          {'text': 'Cat', 'score': 10},
+          {'text': 'Rabbit', 'score': 4},
+          {'text': 'Hamster', 'score': 2},
+        ],
       },
       {
         'questionText': 'What\'s Your Favorite Instructor',
-        'answers': ['Frengky', 'Gunawan', 'Sky', 'Blue'],
+        'answers': [
+          {'text': 'Frengky', 'score': 4},
+          {'text': 'Gunawan', 'score': 6},
+          {'text': 'Sky', 'score': 10},
+          {'text': 'Blue', 'score': 8},
+        ],
       },
     ];
 
@@ -52,7 +77,7 @@ class _MyAppState extends State<MyApp> {
                 questionIndex: _questionIndex,
                 answerQuestion: _answerQuestion,
               )
-            : const Result(),
+            : Result(score: _totalScore, resetHandler: _resetQuiz),
       ),
     );
   }
