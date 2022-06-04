@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quizly/answer.dart';
 import 'package:quizly/question.dart';
+import 'package:quizly/quiz.dart';
+import 'package:quizly/result.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -24,7 +26,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    const questions = [
+    const _questions = [
       {
         'questionText': 'What\'s Your Favorite Colour',
         'answers': ['Black', 'Red', 'Green', 'Blue'],
@@ -44,22 +46,13 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Quizly'),
         ),
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  Question(
-                      questionText:
-                          questions[_questionIndex]['questionText'].toString()),
-                  ...(questions[_questionIndex]['answers'] as List<String>)
-                      .map((answer) {
-                    return Answer(
-                        selectHandler: _answerQuestion, answer: answer);
-                  }).toList(),
-                ],
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                questions: _questions,
+                questionIndex: _questionIndex,
+                answerQuestion: _answerQuestion,
               )
-            : const Center(
-                child: Text('You Did It!'),
-              ),
+            : const Result(),
       ),
     );
   }
