@@ -62,3 +62,21 @@ I learned a lot about basic widgets and dart syntax. Especially about stateless 
 | Today Progress | 9.41% | 
 
 
+---
+
+#### Day 3 - * June 2022*
+#
+
+#####  What i learn today :
+
+##### My Thoughts :
+
+
+###### Last Chapter : #70 
+
+
+| Notes | Progress | 
+| ------ | ------   | 
+| Watched Video Duration | 03:47  | 
+| Learning Duration | 05:09 | 
+| Today Progress | 9.41% | 
