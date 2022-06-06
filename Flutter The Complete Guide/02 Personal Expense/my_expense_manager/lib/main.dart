@@ -12,7 +12,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text('AppBar')),
-        body: const Text('My Playground'),
+        body: Column(children: [
+          Container(
+            width: double.infinity,
+            child: const Card(
+              child: Text('Chart'),
+              color: Colors.blue,
+              elevation: 5,
+            ),
+          ),
+          const Card(
+            child: Text('List TRX'),
+          ),
+        ]),
       ),
     );
   }
