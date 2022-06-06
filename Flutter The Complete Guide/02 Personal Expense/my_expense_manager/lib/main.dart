@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_expense_manager/transaction.dart';
 
 void main() {
@@ -46,14 +47,37 @@ class MyApp extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 16),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.purple,
+                            width: 2,
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(16),
                         child: Text(
-                          trx.amount.toString(),
+                          '\$${trx.amount}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.purple),
                         ),
                       ),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(trx.title),
-                          Text(trx.date.toString()),
+                          Text(
+                            trx.title,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          Text(
+                            DateFormat('dd-MMM-yyyy').format(trx.date),
+                            style: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
                         ],
                       ),
                     ],
