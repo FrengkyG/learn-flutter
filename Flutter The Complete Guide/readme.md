@@ -1,7 +1,7 @@
 # My Flutter Learning Diary
 
 ### My Progress 
-![13.94%](https://progress-bar.dev/14) 
+![16.94%](https://progress-bar.dev/17) 
 <br/>
 <br/>
 
@@ -24,8 +24,8 @@ I thought this course would live up to my expectations. I bought this course to 
 
 | Notes | Progress | 
 | ------ | ------   | 
-| Watched Video Duration | 01:49  | 
-| Learning Duration | 01:58 | 
+| Watched Video Duration | 01:49:00 | 
+| Learning Duration | 01:58:00 | 
 | Today Progress | 4.53% | 
 
 ---
@@ -57,14 +57,39 @@ I learned a lot about basic widgets and dart syntax. Especially about stateless 
 
 | Notes | Progress | 
 | ------ | ------   | 
-| Watched Video Duration | 03:47  | 
-| Learning Duration | 05:09 | 
+| Watched Video Duration | 03:47:00  | 
+| Learning Duration | 05:09:00 | 
 | Today Progress | 9.41% | 
 
 
 ---
 
-#### Day 3 - * June 2022*
+#### Day 3 - *06 June 2022*
+#
+
+#####  What i learn today :
+- Column, Row, Container
+- Styling Container
+- Core Widgets
+- String interpolation
+- DateTime Format
+
+##### My Thoughts :
+Today I started learning to make real apps. The goal is to create a personal expense app. There's not much to code right now, just creating wireframes, modeling transactions and displaying transaction data, it's still far from the goals of this course module. but I'm excited to learn more
+
+###### Last Chapter : #84
+
+
+| Notes | Progress | 
+| ------ | ------   | 
+| Watched Video Duration | 01:12:00  | 
+| Learning Duration | 01:48:00 | 
+| Today Progress | 3% | 
+
+
+---
+
+#### Day 4 - *June 2022*
 #
 
 #####  What i learn today :
@@ -72,11 +97,11 @@ I learned a lot about basic widgets and dart syntax. Especially about stateless 
 ##### My Thoughts :
 
 
-###### Last Chapter : #70 
+###### Last Chapter : #84
 
 
 | Notes | Progress | 
 | ------ | ------   | 
-| Watched Video Duration | 03:47  | 
-| Learning Duration | 05:09 | 
-| Today Progress | 9.41% | 
+| Watched Video Duration | 01:12:00  | 
+| Learning Duration | 01:48:00 | 
+| Today Progress | 3% | 
