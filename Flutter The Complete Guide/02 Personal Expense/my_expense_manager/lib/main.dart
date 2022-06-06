@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       date: DateTime.now(),
     ),
     Transaction(
-      id: 't1',
+      id: 't2',
       title: 'Weekly Groceries',
       amount: 16.34,
       date: DateTime.now(),
@@ -40,9 +40,27 @@ class MyApp extends StatelessWidget {
                 elevation: 5,
               ),
             ),
-            const Card(
-              child: Text('List TRX'),
-            ),
+            Column(
+              children: transactions.map((trx) {
+                return Card(
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Text(
+                          trx.amount.toString(),
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Text(trx.title),
+                          Text(trx.date.toString()),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            )
           ],
         ),
       ),
