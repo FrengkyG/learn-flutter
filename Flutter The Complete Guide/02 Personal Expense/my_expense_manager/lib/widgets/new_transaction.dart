@@ -40,7 +40,7 @@ class NewTransaction extends StatelessWidget {
               onSubmitted: (_) => submitData,
             ),
             TextButton(
-              onPressed: () => submitData,
+              onPressed: submitData,
               child: const Text(
                 'Add Transaction',
                 style: TextStyle(color: Colors.purple),
