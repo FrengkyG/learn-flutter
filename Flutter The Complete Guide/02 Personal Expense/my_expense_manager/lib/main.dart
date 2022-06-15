@@ -67,11 +67,29 @@ class _MyAppOneState extends State<MyAppOne> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        fontFamily: 'Quicksand',
+        textTheme: const TextTheme(
+          titleSmall: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       home: Scaffold(
-        appBar: AppBar(title: const Text('AppBar'), actions: [
+        appBar: AppBar(title: const Text('Personal Expenses'), actions: [
           IconButton(
             onPressed: () => _startAddNewTransaction(context),
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
           )
         ]),
         body: SingleChildScrollView(
@@ -79,9 +97,9 @@ class _MyAppOneState extends State<MyAppOne> {
             // mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
+              const SizedBox(
                 width: double.infinity,
-                child: const Card(
+                child: Card(
                   child: Text('Chart'),
                   color: Colors.blue,
                   elevation: 5,
@@ -92,7 +110,8 @@ class _MyAppOneState extends State<MyAppOne> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          backgroundColor: Colors.amber,
+          child: const Icon(Icons.add),
           onPressed: () => _startAddNewTransaction(context),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
