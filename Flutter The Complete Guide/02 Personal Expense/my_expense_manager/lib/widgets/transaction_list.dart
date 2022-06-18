@@ -3,7 +3,9 @@ import 'package:intl/intl.dart';
 import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
-  const TransactionList({Key? key, required this.transactions})
+  final Function deleteTx;
+  const TransactionList(
+      {Key? key, required this.transactions, required this.deleteTx})
       : super(key: key);
   final List<Transaction> transactions;
 
@@ -51,6 +53,11 @@ class TransactionList extends StatelessWidget {
                     ),
                     subtitle: Text(
                       DateFormat('dd-MMM-yyyy').format(transactions[i].date),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      color: Theme.of(context).errorColor,
+                      onPressed: () => deleteTx(transactions[i].id),
                     ),
                   ),
                 );

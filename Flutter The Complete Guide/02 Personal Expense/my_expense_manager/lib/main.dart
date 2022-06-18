@@ -68,6 +68,12 @@ class _MyAppOneState extends State<MyAppOne> {
     });
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((trx) => trx.id == id);
+    });
+  }
+
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
@@ -110,7 +116,9 @@ class _MyAppOneState extends State<MyAppOne> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Chart(recentTransactions: _recentTransaction),
-              TransactionList(transactions: _userTransactions),
+              TransactionList(
+                  transactions: _userTransactions,
+                  deleteTx: _deleteTransaction),
             ],
           ),
         ),
