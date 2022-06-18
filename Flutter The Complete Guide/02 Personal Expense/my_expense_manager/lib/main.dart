@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_expense_manager/models/transaction.dart';
+import 'package:my_expense_manager/widgets/chart.dart';
 import 'package:my_expense_manager/widgets/new_transaction.dart';
 import 'package:my_expense_manager/widgets/transaction_list.dart';
 
@@ -42,6 +43,16 @@ class _MyAppOneState extends State<MyAppOne> {
     //   date: DateTime.now(),
     // ),
   ];
+
+  List<Transaction> get _recentTransaction {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -97,14 +108,7 @@ class _MyAppOneState extends State<MyAppOne> {
             // mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(
-                width: double.infinity,
-                child: Card(
-                  child: Text('Chart'),
-                  color: Colors.blue,
-                  elevation: 5,
-                ),
-              ),
+              Chart(recentTransactions: _recentTransaction),
               TransactionList(transactions: _userTransactions),
             ],
           ),
