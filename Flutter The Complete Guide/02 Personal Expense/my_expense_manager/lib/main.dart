@@ -29,20 +29,7 @@ class MyAppOne extends StatefulWidget {
 }
 
 class _MyAppOneState extends State<MyAppOne> {
-  final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'New Shoes',
-    //   amount: 69.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Weekly Groceries',
-    //   amount: 16.34,
-    //   date: DateTime.now(),
-    // ),
-  ];
+  final List<Transaction> _userTransactions = [];
 
   List<Transaction> get _recentTransaction {
     return _userTransactions.where((tx) {
@@ -84,6 +71,17 @@ class _MyAppOneState extends State<MyAppOne> {
 
   @override
   Widget build(BuildContext context) {
+    final _appBar = AppBar(title: const Text('Personal Expenses'), actions: [
+      IconButton(
+        onPressed: () => _startAddNewTransaction(context),
+        icon: const Icon(Icons.add),
+      )
+    ]);
+
+    final height = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top -
+        _appBar.preferredSize.height;
+
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.purple,
@@ -104,21 +102,22 @@ class _MyAppOneState extends State<MyAppOne> {
         ),
       ),
       home: Scaffold(
-        appBar: AppBar(title: const Text('Personal Expenses'), actions: [
-          IconButton(
-            onPressed: () => _startAddNewTransaction(context),
-            icon: const Icon(Icons.add),
-          )
-        ]),
+        appBar: _appBar,
         body: SingleChildScrollView(
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Chart(recentTransactions: _recentTransaction),
-              TransactionList(
-                  transactions: _userTransactions,
-                  deleteTx: _deleteTransaction),
+              SizedBox(
+                height: height * 0.3,
+                child: Chart(recentTransactions: _recentTransaction),
+              ),
+              SizedBox(
+                height: height * 0.7,
+                child: TransactionList(
+                    transactions: _userTransactions,
+                    deleteTx: _deleteTransaction),
+              ),
             ],
           ),
         ),
