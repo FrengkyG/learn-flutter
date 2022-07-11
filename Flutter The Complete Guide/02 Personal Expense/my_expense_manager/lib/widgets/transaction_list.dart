@@ -12,22 +12,24 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return transactions.isEmpty
-        ? Column(
-            children: [
-              Text(
-                'There is no transaction yet',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              Container(
-                height: 200,
-                margin: const EdgeInsets.only(top: 10),
-                child: Image.asset(
-                  'assets/images/waiting.png',
-                  fit: BoxFit.cover,
+        ? LayoutBuilder(builder: (context, constraints) {
+            return Column(
+              children: [
+                Text(
+                  'There is no transaction yet',
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
-              ),
-            ],
-          )
+                Container(
+                  height: constraints.maxHeight * 0.6,
+                  margin: const EdgeInsets.only(top: 10),
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            );
+          })
         : ListView.builder(
             itemCount: transactions.length,
             itemBuilder: (ctx, i) {
