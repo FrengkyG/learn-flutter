@@ -47,7 +47,11 @@ class ProductOverviewScreen extends StatelessWidget {
       body: GridView.builder(
         padding: const EdgeInsets.all(10.0),
         itemCount: loadedProducts.length,
-        itemBuilder: (ctx, i) => ProductItem(product: loadedProducts[i]),
+        itemBuilder: (ctx, i) => ProductItem(
+          id: loadedProducts[i].id,
+          title: loadedProducts[i].title,
+          imageUrl: loadedProducts[i].imageUrl,
+        ),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 3 / 2,
