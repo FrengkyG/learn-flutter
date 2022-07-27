@@ -13,7 +13,7 @@ class CartScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Cart'),
+        title: const Text('Your Cart'),
       ),
       body: Column(
         children: [
@@ -28,18 +28,18 @@ class CartScreen extends StatelessWidget {
                 title: cart.items.values.toList()[i].title),
           )),
           Card(
-            margin: EdgeInsets.all(15),
+            margin: const EdgeInsets.all(15),
             child: Padding(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Total', style: TextStyle(fontSize: 20)),
-                  Spacer(),
+                  const Text('Total', style: TextStyle(fontSize: 20)),
+                  const Spacer(),
                   Chip(
                     label: Text(
                       '\$${cart.totalAmount}',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),

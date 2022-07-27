@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/providers/cart_provider.dart';
-import 'package:shop_app/providers/products_provider.dart';
 import 'package:shop_app/screens/cart_screen.dart';
 import 'package:shop_app/widgets/badge.dart';
 
 import '../widgets/product_grid.dart';
 
 enum FilterOptions {
+  // ignore: constant_identifier_names
   Favorites,
+  // ignore: constant_identifier_names
   All,
 }
 
 class ProductOverviewScreen extends StatefulWidget {
-  ProductOverviewScreen({Key? key}) : super(key: key);
+  const ProductOverviewScreen({Key? key}) : super(key: key);
 
   @override
   State<ProductOverviewScreen> createState() => _ProductOverviewScreenState();
@@ -26,7 +27,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MyShop'),
+        title: const Text('MyShop'),
         actions: [
           PopupMenuButton(
               onSelected: (FilterOptions selectedValue) {
@@ -38,13 +39,13 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
                   }
                 });
               },
-              icon: Icon(Icons.more_vert),
+              icon: const Icon(Icons.more_vert),
               itemBuilder: (_) => [
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       child: Text('Only Favorites'),
                       value: FilterOptions.Favorites,
                     ),
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       child: Text('Show All'),
                       value: FilterOptions.All,
                     ),
@@ -55,7 +56,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
               value: cartData.itemCount.toString(),
             ),
             child: IconButton(
-              icon: Icon(Icons.shopping_cart),
+              icon: const Icon(Icons.shopping_cart),
               onPressed: () {
                 Navigator.of(context).pushNamed(CartScreen.routeName);
               },
