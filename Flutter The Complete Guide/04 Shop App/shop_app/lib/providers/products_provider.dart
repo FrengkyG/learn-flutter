@@ -68,10 +68,10 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) {
     final url = Uri.parse(
         'https://flutter-udemy-9b856-default-rtdb.asia-southeast1.firebasedatabase.app/products.json');
-    http
+    return http
         .post(url,
             body: json.encode({
               'title': product.title,
@@ -81,7 +81,6 @@ class Products with ChangeNotifier {
               'isFavorite': product.isFavorite,
             }))
         .then((response) {
-      print(json.decode(response.body));
       final newProduct = Product(
           title: product.title,
           description: product.description,
@@ -89,10 +88,8 @@ class Products with ChangeNotifier {
           imageUrl: product.imageUrl,
           id: json.decode(response.body)['name']);
       _items.add(newProduct);
+      notifyListeners();
     });
-
-    // _items.insert(0, newProduct);
-    notifyListeners();
   }
 
   void updateProduct(String id, Product newProduct) {
