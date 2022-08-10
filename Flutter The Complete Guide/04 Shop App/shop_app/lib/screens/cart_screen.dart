@@ -4,9 +4,16 @@ import 'package:shop_app/providers/cart_provider.dart' show Cart;
 import 'package:shop_app/providers/orders_provider.dart';
 import '../widgets/cart_item.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   static const routeName = '/cart';
   const CartScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  var _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,15 +52,27 @@ class CartScreen extends StatelessWidget {
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                   MaterialButton(
-                    onPressed: () {
-                      Provider.of<Orders>(context, listen: false).addOrder(
-                          cart.items.values.toList(), cart.totalAmount);
-                      cart.clear();
-                    },
-                    child: Text(
-                      'ORDER NOW',
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
+                    onPressed: (cart.totalAmount <= 0 || _isLoading)
+                        ? () {}
+                        : () async {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                            await Provider.of<Orders>(context, listen: false)
+                                .addOrder(cart.items.values.toList(),
+                                    cart.totalAmount);
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            cart.clear();
+                          },
+                    child: _isLoading
+                        ? const CircularProgressIndicator()
+                        : Text(
+                            'ORDER NOW',
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                          ),
                   ),
                 ],
               ),
