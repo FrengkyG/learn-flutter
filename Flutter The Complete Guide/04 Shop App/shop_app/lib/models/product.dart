@@ -25,9 +25,9 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleFavoriteStatus() async {
+  void toggleFavoriteStatus(String token) async {
     final url = Uri.parse(
-        'https://flutter-udemy-9b856-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json');
+        'https://flutter-udemy-9b856-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json?auth=$token');
     final oldStatus = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();

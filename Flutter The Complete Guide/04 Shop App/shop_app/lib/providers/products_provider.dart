@@ -77,7 +77,11 @@ class Products with ChangeNotifier {
         'https://flutter-udemy-9b856-default-rtdb.asia-southeast1.firebasedatabase.app/products.json?auth=$authToken');
     try {
       final response = await http.get(url);
+      print(json.decode(response.body));
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData.isEmpty) {
+        return;
+      }
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
         loadedProducts.add(Product(
@@ -85,20 +89,22 @@ class Products with ChangeNotifier {
           title: prodData['title'],
           description: prodData['description'],
           price: prodData['price'],
-          imageUrl: prodData['imageUrl'],
           isFavorite: prodData['isFavorite'],
+          imageUrl: prodData['imageUrl'],
         ));
-        _items = loadedProducts;
       });
+      _items = loadedProducts;
+
       notifyListeners();
     } catch (error) {
+      print(error);
       throw (error);
     }
   }
 
   Future<void> addProduct(Product product) async {
     final url = Uri.parse(
-        'https://flutter-udemy-9b856-default-rtdb.asia-southeast1.firebasedatabase.app/products.json');
+        'https://flutter-udemy-9b856-default-rtdb.asia-southeast1.firebasedatabase.app/products.json?auth=$authToken');
 
     try {
       final response = await http.post(url,
@@ -125,7 +131,7 @@ class Products with ChangeNotifier {
 
   Future<void> updateProduct(String id, Product newProduct) async {
     final url = Uri.parse(
-        'https://flutter-udemy-9b856-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json');
+        'https://flutter-udemy-9b856-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json?auth=$authToken');
     await http.patch(url,
         body: json.encode({
           'title': newProduct.title,
@@ -141,7 +147,7 @@ class Products with ChangeNotifier {
 
   Future<void> deleteProduct(String id) async {
     final url = Uri.parse(
-        'https://flutter-udemy-9b856-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json');
+        'https://flutter-udemy-9b856-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json?auth=$authToken');
     // delete product in memory not in list
     final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
     Product? existingProduct = _items[existingProductIndex];
