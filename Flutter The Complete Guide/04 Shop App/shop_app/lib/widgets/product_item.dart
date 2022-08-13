@@ -31,7 +31,8 @@ class ProductItem extends StatelessWidget {
                       const AssetImage('assets/images/product-placeholder.png'),
                   image: NetworkImage(
                     product.imageUrl,
-                  )),
+                  ),
+                  fit: BoxFit.cover),
             )),
         footer: GridTileBar(
           backgroundColor: Colors.black38,
