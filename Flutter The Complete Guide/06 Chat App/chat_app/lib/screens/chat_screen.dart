@@ -1,3 +1,5 @@
+import 'package:chat_app/widgets/chat/message.dart';
+import 'package:chat_app/widgets/chat/new_message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,34 +37,13 @@ class ChatScreen extends StatelessWidget {
               })
         ],
       ),
-      body: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection('chats/kmb32kaA11TuJU3bwv3h/messages')
-              .snapshots(),
-          builder: (ctx, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-            if (streamSnapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            final documents = streamSnapshot.data!.docs;
-            return ListView.builder(
-              itemCount: documents.length,
-              itemBuilder: (context, index) => Container(
-                padding: const EdgeInsets.all(8),
-                child: Text(documents[index]['text']),
-              ),
-            );
-          }),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          FirebaseFirestore.instance
-              .collection('chats/kmb32kaA11TuJU3bwv3h/messages')
-              .add({
-            'text': 'Im fine thanks',
-          });
-        },
+      body: Column(
+        children: const [
+          Expanded(
+            child: Messages(),
+          ),
+          NewMesage(),
+        ],
       ),
     );
   }
