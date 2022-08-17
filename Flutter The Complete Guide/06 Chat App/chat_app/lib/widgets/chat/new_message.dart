@@ -23,6 +23,7 @@ class _NewMesageState extends State<NewMesage> {
       'createdAt': Timestamp.now(),
       'userId': user,
       'username': userData['username'],
+      'userImage': userData['image_url'],
     });
     _controller.clear();
   }
